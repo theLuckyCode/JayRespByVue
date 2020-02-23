@@ -1,6 +1,15 @@
 <template>
     <div>
-        <el-form :rules="rules" ref="loginForm" :model="loginForm" class="loginContainer">
+        <!--v-loading是加载时的动画，可放在任意的地方-->
+        <el-form
+                v-loading="loading"
+                element-loading-text="拼命加载中"
+                element-loading-spinner="el-icon-loading"
+                element-loading-background="rgba(0, 0, 0, 0.8)"
+                :rules="rules"
+                ref="loginForm"
+                :model="loginForm"
+                class="loginContainer">
             <h3 class="loginTitle">系统登陆</h3>
             <el-form-item prop="username">
                 <!--el-form-item元素的prop属性绑定字段名name，表单验证时，就会验证el-input元素绑定的变量ruleForm.name的值是否符合验证规则-->
@@ -32,7 +41,8 @@
                     //element里面的trigger: 'blur'和trigger: 'change'有什么区别
                     //trigger代表触发方式，blur失去焦点，change数据改变
                     password:[{required:true,message:"请输入密码",trigger:"blur"}]
-                }
+                },
+                loading:false //当此值为true时，那么加载的动画就会出现
             }
         },
         methods: {
@@ -40,8 +50,10 @@
                 //该方法也是element ui上面的校验方法,验证输入框里面有没有输入内容
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
+                        this.loading=true;
                         this.postKeyValueRequest("/doLogin",this.loginForm).then(resp =>{
                             if (resp){
+                                this.loading=false;
                                 //alert(JSON.stringify(resp))
                                 //将登录的用户信息存到session里面去
                                 window.sessionStorage.setItem("user",JSON.stringify(resp))

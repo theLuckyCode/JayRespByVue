@@ -14,6 +14,10 @@
         </div>
         <div style="margin-top: 10px">
             <el-table
+                    v-loading="loading"
+                    element-loading-text="拼命加载中"
+                    element-loading-spinner="el-icon-loading"
+                    element-loading-background="rgba(0, 0, 0, 0.8)"
                     :data="jls"
                     border
                     stripe
@@ -107,6 +111,7 @@
         name: "JobLevelMana",
         data(){
             return {
+                loading:false,
                 jl:{
                     name:"",
                     titleLevel:"",
@@ -205,7 +210,9 @@
                 }
             },
             initJl(){
+                this.loading=true;
                 this.getRequest("/system/basic/joblevel/").then(resp=>{
+                    this.loading=false;
                     this.jls=resp;
                 })
             }
