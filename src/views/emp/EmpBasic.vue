@@ -11,7 +11,7 @@
                 <el-button type="success" size="small">
                     <i class="fa fa-level-up" aria-hidden="true"></i>
                     导入数据</el-button>
-                <el-button type="success" size="small">
+                <el-button type="success" size="small" @click="exportData">
                     <i class="fa fa-level-down" aria-hidden="true"></i>
                     导出数据</el-button>
                 <el-button type="primary" icon="el-icon-plus" size="small" @click="showAddEmpView">添加用户</el-button>
@@ -179,9 +179,9 @@
                         width="220"
                         label="操作">
                     <template slot-scope="scope">
-                        <el-button style="padding: 3px" size="mini">编辑</el-button>
+                        <el-button style="padding: 3px" size="mini" @click="showEditEmpView(scope.row)">编辑</el-button>
                         <el-button style="padding: 3px" size="mini" type="primary">查看高级资料</el-button>
-                        <el-button style="padding: 3px" size="mini" type="danger">删除</el-button>
+                        <el-button style="padding: 3px" size="mini" type="danger" @click="deleteEmployeeById(scope.row)">删除</el-button>  <!--scope.row代表这一行的数据-->
                     </template>
                 </el-table-column>
             </el-table>
@@ -196,7 +196,7 @@
             </div>
         </div>
         <el-dialog
-                title="添加员工"
+                :title="title"
                 :visible.sync="dialogVisible"
                 width="80%">
             <div>
@@ -433,6 +433,7 @@ border-radius: 5px;cursor: pointer;align-items: center" @click="showDepView">{{i
         name: "Basic",
         data(){
             return {
+                title:'添加员工',
                 inputDepName:'',
                 allDeps:[],
                 popVisible:false,
@@ -485,7 +486,6 @@ border-radius: 5px;cursor: pointer;align-items: center" @click="showDepView">{{i
                     specialty: "信息管理与信息系统",
                     school: "深圳大学",
                     beginDate: "2017-12-31",
-                    workState: "在职",
                     workID: "00000057",
                     contractTerm: 2,
                     conversionTime: "2018-03-31",
@@ -542,17 +542,89 @@ border-radius: 5px;cursor: pointer;align-items: center" @click="showDepView">{{i
             this.initData();
         },
         methods:{
+            exportData(){
+                //请求，然后进行下载，_parent代表在当前窗口打开
+                window.open('/employee/basic/export','_parent');
+            },
+            emptyEmp(){
+              this.emp = {
+                    name: "javaboy",
+                    gender: "男",
+                    birthday: "1989-12-31",
+                    idCard: "610122199001011256",
+                    wedlock: "已婚",
+                    nationId: 1,
+                    nativePlace: "陕西",
+                    politicId: 13,
+                    email: "laowang@qq.com",
+                    phone: "18565558897",
+                    address: "深圳市南山区",
+                    departmentId: null,
+                    jobLevelId: 9,
+                    posId: 29,
+                    engageForm: "劳务合同",
+                    tiptopDegree: "本科",
+                    specialty: "信息管理与信息系统",
+                    school: "深圳大学",
+                    beginDate: "2017-12-31",
+                    workID: "00000057",
+                    contractTerm: 2,
+                    conversionTime: "2018-03-31",
+                    notworkDate: null,
+                    beginContract: "2017-12-31",
+                    endContract: "2019-12-31",
+                    workAge: null
+              }
+            },
+            showEditEmpView(data){
+               this.title='编辑员工信息';
+               this.dialogVisible=true;
+               this.emp = data;
+            },
+            deleteEmployeeById(data){
+                this.$confirm('此操作将永久删除【'+data.name+'】员工, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.deleteRequest("/employee/basic/"+data.id).then(resp=>{
+                        if (resp){
+                            this.initEmps();
+                        }
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+            },
             doAddEmp(){
-                this.$refs['empForm'].validate(valid => {
-                    if (valid){
-                        this.postRequest("/emp/basic/",this.emp).then(resp=>{
-                            if (resp){
-                                this.dialogVisible = false;
-                                this.initEmps();
-                            }
-                        })
-                    }
-                })
+                if (this.emp.id){
+                    //若有id就是更新员工
+                    this.$refs['empForm'].validate(valid => {
+                        if (valid){
+                            this.putRequest("/employee/basic/",this.emp).then(resp=>{
+                                if (resp){
+                                    this.dialogVisible = false;
+                                    this.initEmps();
+                                }
+                            })
+                        }
+                    })
+                }else {
+                    //若该对象没有id则是添加员工
+                    this.$refs['empForm'].validate(valid => {
+                        if (valid){
+                            this.postRequest("/employee/basic/",this.emp).then(resp=>{
+                                if (resp){
+                                    this.dialogVisible = false;
+                                    this.initEmps();
+                                }
+                            })
+                        }
+                    })
+                }
             },
             //node-click事件：节点被点击时的回调，参数是data 属性数组中该节点所对应的对象
             handleNodeClick(data){
@@ -564,14 +636,14 @@ border-radius: 5px;cursor: pointer;align-items: center" @click="showDepView">{{i
                 this.popVisible = !this.popVisible
             },
             getMaxWorkID(){
-                this.getRequest("/emp/basic/maxWorkID").then(resp=>{
+                this.getRequest("/employee/basic/maxWorkID").then(resp=>{
                     if (resp){
                         this.emp.workID = resp.obj;
                     }
                 })
             },
             initPositions(){
-                this.getRequest("/emp/basic/positions").then(resp=>{
+                this.getRequest("/employee/basic/positions").then(resp=>{
                     if (resp){
                         this.positions = resp;
                     }
@@ -579,7 +651,7 @@ border-radius: 5px;cursor: pointer;align-items: center" @click="showDepView">{{i
             },
             initData(){
                 if (!window.sessionStorage.getItem("nations")){
-                    this.getRequest("/emp/basic/nations").then(resp=>{
+                    this.getRequest("/employee/basic/nations").then(resp=>{
                         if (resp){
                             this.nations = resp;
                             window.sessionStorage.setItem("nations",JSON.stringify(resp));
@@ -589,7 +661,7 @@ border-radius: 5px;cursor: pointer;align-items: center" @click="showDepView">{{i
                     this.nations = JSON.parse(window.sessionStorage.getItem("nations"));
                 }
                 if (!window.sessionStorage.getItem("politicsstatus")){
-                    this.getRequest("/emp/basic/politicsstatus").then(resp=>{
+                    this.getRequest("/employee/basic/politicsstatus").then(resp=>{
                         if (resp){
                             this.politicsstatus = resp;
                             window.sessionStorage.setItem("politicsstatus",JSON.stringify(resp));
@@ -599,7 +671,7 @@ border-radius: 5px;cursor: pointer;align-items: center" @click="showDepView">{{i
                     this.politicsstatus = JSON.parse(window.sessionStorage.getItem("politicsstatus"));
                 }
                 if (!window.sessionStorage.getItem("jobLevels")){
-                    this.getRequest("/emp/basic/jobLevels").then(resp=>{
+                    this.getRequest("/employee/basic/jobLevels").then(resp=>{
                         if (resp){
                             this.jobLevels = resp;
                             window.sessionStorage.setItem("jobLevels",JSON.stringify(resp));
@@ -609,7 +681,7 @@ border-radius: 5px;cursor: pointer;align-items: center" @click="showDepView">{{i
                     this.jobLevels = JSON.parse(window.sessionStorage.getItem("jobLevels"));
                 }
                 if (!window.sessionStorage.getItem("deps")){
-                    this.getRequest("/emp/basic/getAllDeps").then(resp=>{
+                    this.getRequest("/employee/basic/getAllDeps").then(resp=>{
                         if (resp){
                             this.allDeps = resp;
                             window.sessionStorage.setItem("deps",JSON.stringify(resp));
@@ -620,6 +692,8 @@ border-radius: 5px;cursor: pointer;align-items: center" @click="showDepView">{{i
                 }
             },
             showAddEmpView(){
+                this.emptyEmp();
+                this.title = '添加员工';
                 this.initPositions();
                 this.getMaxWorkID();
                 this.dialogVisible = true
@@ -636,7 +710,7 @@ border-radius: 5px;cursor: pointer;align-items: center" @click="showDepView">{{i
             },
             initEmps(){
                 this.loading = true;
-                this.getRequest("/emp/basic/?page="+this.page+"&size="+this.size+"&keyword="+this.keyword).then(resp=>{
+                this.getRequest("/employee/basic/?page="+this.page+"&size="+this.size+"&keyword="+this.keyword).then(resp=>{
                     this.loading=false;
                     if (resp){
                         this.total = resp.total;
