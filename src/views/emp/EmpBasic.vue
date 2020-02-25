@@ -8,12 +8,24 @@
                 <el-button type="primary" size="small"><i class="fa fa-angle-double-down" aria-hidden="true"></i>高级搜索</el-button>
             </div>
             <div>
-                <el-button type="success" size="small">
-                    <i class="fa fa-level-up" aria-hidden="true"></i>
-                    导入数据</el-button>
-                <el-button type="success" size="small" @click="exportData">
-                    <i class="fa fa-level-down" aria-hidden="true"></i>
-                    导出数据</el-button>
+                <!-- on-error:文件上传失败触发事件               -->
+                <!-- on-success:文件上传成功触发事件               -->
+                <!-- before-upload:上传文件之前触发的事件，参数为上传的文件，若返回 false 或者返回 Promise 且被 reject，则停止上传。               -->
+                <el-upload
+                        :disabled="importDataDisable"
+                        :on-error="onError"
+                        :on-success="onSuccess"
+                        :before-upload="beforeUpload"
+                        :show-file-list="false"
+                        style="display: inline-flex;margin-right: 8px"
+                        action="/employee/basic/import">
+                    <el-button type="success" size="small" :icon="importDataBtnIcon" :disabled="importDataDisable">
+                        {{importDataBtnText}}
+                    </el-button>
+                </el-upload>
+                <el-button type="success" size="small" @click="exportData" icon="el-icon-download">
+                    导出数据
+                </el-button>
                 <el-button type="primary" icon="el-icon-plus" size="small" @click="showAddEmpView">添加用户</el-button>
             </div>
         </div>
@@ -433,6 +445,9 @@ border-radius: 5px;cursor: pointer;align-items: center" @click="showDepView">{{i
         name: "Basic",
         data(){
             return {
+                importDataDisable:false,
+                importDataBtnText:"导入数据",
+                importDataBtnIcon:"el-icon-upload2",
                 title:'添加员工',
                 inputDepName:'',
                 allDeps:[],
@@ -542,6 +557,22 @@ border-radius: 5px;cursor: pointer;align-items: center" @click="showDepView">{{i
             this.initData();
         },
         methods:{
+            onSuccess(){
+                this.importDataBtnIcon="el-icon-upload2";
+                this.importDataBtnText="导入数据"
+                this.importDataDisable=false;
+                this.initEmps();
+            },
+            onError(){
+                this.importDataBtnIcon="el-icon-upload2";
+                this.importDataBtnText="导入数据"
+                this.importDataDisable=false;
+            },
+            beforeUpload(){
+                this.importDataDisable=true;
+                this.importDataBtnIcon="el-icon-loading";
+                this.importDataBtnText="正在上传"
+            },
             exportData(){
                 //请求，然后进行下载，_parent代表在当前窗口打开
                 window.open('/employee/basic/export','_parent');
