@@ -19,7 +19,7 @@
             <el-aside width="200px">
                 <el-menu router unique-opened>
                     <!--router unique-opened 是 elementui的方法跟据每一项的index进行跳转，当然也可以@select="menuClick"-->
-                    <el-submenu index="1" v-for="(item,index) in routes" v-if="!item.hidden" :key="index">
+                    <el-submenu :index="index" v-for="(item,index) in routes" v-if="!item.hidden" :key="index">
                         <template slot="title">
                             <i :class="item.iconCls" style="color: #2c90ff;margin-right: 5px"></i>
                             <span>{{item.name}}</span>
