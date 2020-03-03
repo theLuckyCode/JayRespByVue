@@ -3,16 +3,19 @@
         <!--头部-->
         <el-header class="homeHeader">
             <div class="title">微人事</div>
-            <el-dropdown class="userInfo" @command="commandHandler">
+            <div>
+                <el-button icon="el-icon-message-solid" type="text" style="margin-right: 10px;color: black" size="normal" @click="goChat"></el-button>
+                <el-dropdown class="userInfo" @command="commandHandler">
              <span class="el-dropdown-link">
               {{user.username}}<img :src="user.userface" alt="">
              </span>
-                <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item command="userInfo">个人中心</el-dropdown-item>
-                    <el-dropdown-item command="setting">设置</el-dropdown-item>
-                    <el-dropdown-item divided command="logout">注销登录</el-dropdown-item>
-                </el-dropdown-menu>
-            </el-dropdown>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item command="userInfo">个人中心</el-dropdown-item>
+                        <el-dropdown-item command="setting">设置</el-dropdown-item>
+                        <el-dropdown-item divided command="logout">注销登录</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            </div>
         </el-header>
         <el-container>
             <!--      侧栏      -->
@@ -57,6 +60,9 @@
             }
         },
         methods: {
+            goChat(){
+              this.$router.push("/chat")
+            },
             menuClick(index) {
                 this.$router.push(index)
             },

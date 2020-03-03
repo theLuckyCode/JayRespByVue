@@ -4,6 +4,7 @@ import Login from '../views/Login.vue'
 import Home from "../views/Home";
 import Test1 from "../views/Test1";
 import Test2 from "../views/Test2";
+import friendChat from "../views/chat/friendChat";
 
 Vue.use(VueRouter)
 
@@ -31,6 +32,11 @@ const routes = [
                 path: '/test2',
                 name: '选项二',
                 component: Test2
+            },{
+                path:'/chat',
+                name:'聊天界面',
+                component:friendChat,
+                hidden:true
             }
         ]
     }
