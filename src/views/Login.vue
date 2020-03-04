@@ -80,7 +80,7 @@
        margin: 180px auto;
        width: 350px;
        padding: 15px 35px 15px 35px;
-       background: burlywood;
+       background: white;
        border: 1px solid #eaeaea;
        box-shadow: 0 0 25px #cac6c6;
     }

@@ -1,6 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { Notification } from 'element-ui';
 import {getRequest} from "../utils/api";
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
+
 
 Vue.use(Vuex);
 
@@ -29,6 +33,7 @@ const store = new Vuex.Store({
             state.currentSession = currentSession;
         },
         addMessage(state, msg) {
+            //sessions是一个key/value的形式，key是谁和谁聊天，value是聊天的内容
             let mss = state.sessions[state.currentHr.username + '#' + msg.to];
             if (!mss) {
                 // state.sessions[state.currentHr.username+'#'+msg.to] = [];
@@ -53,11 +58,15 @@ const store = new Vuex.Store({
         }
     },
     actions: {
+        //该方法用于登陆之后就马上连接上聊天
         connect(context) {
+            //写上连接地址，也就是后台WebSocketConfig配置类那里配置的registerStompEndpoints
             context.state.stomp = Stomp.over(new SockJS('/ws/ep'));
+            //发起连接，第一个参数是一些额外的选项，这里可以暂时不填；第二个参数就是连接成功的回调；第三个则是连接失败的回调
             context.state.stomp.connect({}, success => {
+                //订阅消息，这里的路径前面一定要加前缀user，原理和SpringSecurity角色前面加ROLE一样；msg就是服务端发回来的消息
                 context.state.stomp.subscribe('/user/queue/chat', msg => {
-                    let receiveMsg = JSON.parse(msg.body);
+                    let receiveMsg = JSON.parse(msg.body);  //msg中的body才是消息内容
                     if (!context.state.currentSession || receiveMsg.from != context.state.currentSession.username) {
                         Notification.info({
                             title: '【' + receiveMsg.fromNickname + '】发来一条消息',
@@ -66,8 +75,8 @@ const store = new Vuex.Store({
                         })
                         Vue.set(context.state.isDot, context.state.currentHr.username + '#' + receiveMsg.from, true);
                     }
-                    receiveMsg.notSelf = true;
-                    receiveMsg.to = receiveMsg.from;
+                    receiveMsg.notSelf = true;  //接收到的信息并不是接收人发送的，而是对方发信息过来的
+                    receiveMsg.to = receiveMsg.from; //to要改成from，举个例子：我跟李白说话，我发出去的消息，李白接收了；若不做处理，那么就变成了李白跟李白在对话
                     context.commit('addMessage', receiveMsg);
                 })
             }, error => {

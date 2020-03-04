@@ -4,11 +4,11 @@
         <ul v-if="currentSession">
             <li v-for="entry in sessions[user.username+'#'+currentSession.username]">
                 <p class="time">
-                    <span>{{entry.date | time}}</span>
+                    <span>{{entry.date | time}}</span>  <!--发送日期-->
                 </p>
                 <div class="main" :class="{self:entry.self}">
-                    <img class="avatar" :src="entry.self ? user.userface : currentSession.userface" alt="">
-                    <p class="text">{{entry.content}}</p>
+                    <img class="avatar" :src="entry.self ? user.userface : currentSession.userface" alt="">  <!--头像-->
+                    <p class="text">{{entry.content}}</p>   <!--消息的内容-->
                 </div>
             </li>
         </ul>

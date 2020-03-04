@@ -4,6 +4,13 @@
 //前端请求到了nodejs，nodejs转发到后端；后端把响应结果传到nodejs，nodejs转发到前端，相当于nodejs充当一个消息中转站
 //PS:这个文件名只能起这个名字，取其他名字是不生效的，请记住这次的踩坑！！！！！
 let proxyObj = {};
+//若前缀为ws就是关于websocket的发送
+//详细可参考：http://www.javaboy.org/2019/0818/springboot-vue-axios.html
+proxyObj['/ws'] = {
+    ws: true,
+    target: "ws://localhost:8081"
+};
+//若为/就是普通的http
 proxyObj['/'] = {
     ws: false,
     target: 'http://localhost:8081',
