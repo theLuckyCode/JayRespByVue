@@ -53,6 +53,8 @@
                         this.loading=true;
                         this.postKeyValueRequest("/doLogin",this.loginForm).then(resp =>{
                             if (resp){
+                                //登录之后把当前登录的用户赋值给聊天页面那边currentHr
+                                this.$store.commit("INIT_CURRENTHR",resp.obj);
                                 this.loading=false;
                                 //alert(JSON.stringify(resp))
                                 //将登录的用户信息存到session里面去

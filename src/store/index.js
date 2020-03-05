@@ -2,8 +2,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { Notification } from 'element-ui';
 import {getRequest} from "../utils/api";
-import SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
+import Stomp from '../utils/stomp'
+import SockJS from '../utils/sockjs'
 
 
 Vue.use(Vuex);
@@ -37,6 +37,7 @@ const store = new Vuex.Store({
             let mss = state.sessions[state.currentHr.username + '#' + msg.to];
             if (!mss) {
                 // state.sessions[state.currentHr.username+'#'+msg.to] = [];
+                //当聊天发送消息时，会自动刷新聊天页
                 Vue.set(state.sessions, state.currentHr.username + '#' + msg.to, []);
             }
             state.sessions[state.currentHr.username + '#' + msg.to].push({
@@ -98,7 +99,7 @@ const store = new Vuex.Store({
 store.watch(function (state) {
     return state.sessions
 }, function (val) {
-    localStorage.setItem('vue-chat-session', JSON.stringify(val));
+    localStorage.setItem('vue-chat-session', JSON.stringify(val)); //监听，当state里面的sessions发生变化时，就给vue-chat-session赋值
 }, {
     deep: true/*这个貌似是开启watch监测的判断,官方说明也比较模糊*/
 })
