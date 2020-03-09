@@ -22,6 +22,8 @@ Vue.prototype.getRequest = getRequest;
 Vue.prototype.deleteRequest = deleteRequest;
 
 Vue.use(ElementUI);
+//没有Vue.config.productionTip = false这句代码，它会显示你生产模式的消息
+//有了Vue.config.productionTip = false这句代码，它会阻止你显示生产模式的消息
 Vue.config.productionTip = false
 
 //路由守卫，防止用户按F5刷新页面，之后不加载菜单出来

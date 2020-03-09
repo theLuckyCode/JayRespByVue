@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="dc3844b0-c9ec-41c1-a664-f4c6295cddb1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/babel-loader/b1b67da3a4d3822a4768ecf84f9bbbf9.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/babel-loader/b1b67da3a4d3822a4768ecf84f9bbbf9.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/71e312cfd695fc6896385a2a39138a44.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/71e312cfd695fc6896385a2a39138a44.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/8ca778213022a8612a16068fd864950f.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/8ca778213022a8612a16068fd864950f.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/940f1391800432fdd95f5f16cbeb06ab.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/940f1391800432fdd95f5f16cbeb06ab.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/9600666af36aeeb39e0f5c3fc17dfcdb.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/9600666af36aeeb39e0f5c3fc17dfcdb.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/b12a7c9f1f64e2763e90828ee1bcfd8a.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/b12a7c9f1f64e2763e90828ee1bcfd8a.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chat/usertext.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chat/usertext.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +97,9 @@
       <workItem from="1583110205168" duration="4710000" />
       <workItem from="1583195918330" duration="13667000" />
       <workItem from="1583282875969" duration="19470000" />
-      <workItem from="1583369274857" duration="8345000" />
+      <workItem from="1583369274857" duration="9084000" />
+      <workItem from="1583464446884" duration="2230000" />
+      <workItem from="1583715103696" duration="8577000" />
     </task>
     <task id="LOCAL-00001" summary="画完部门以及管理员操作的一半">
       <created>1582276789464</created>
@@ -156,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583313928801</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="周四">
+      <created>1583400276885</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1583400276885</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,7 +171,8 @@
     <MESSAGE value="完成员工账套" />
     <MESSAGE value="聊天页面" />
     <MESSAGE value="继续搞聊天的" />
-    <option name="LAST_COMMIT_MESSAGE" value="继续搞聊天的" />
+    <MESSAGE value="周四" />
+    <option name="LAST_COMMIT_MESSAGE" value="周四" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582246572434">
@@ -185,42 +187,42 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="658" y="215" key="#run/0.0.1920.1040@0.0.1920.1040" timestamp="1582246616266" />
-    <state x="560" y="109" key="CommitChangelistDialog2" timestamp="1583313909977">
+    <state x="560" y="109" key="CommitChangelistDialog2" timestamp="1583400272215">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="560" y="109" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1583313909977" />
+    <state x="560" y="109" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1583400272215" />
     <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1583376168554">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1583376168554" />
-    <state width="1898" height="277" key="GridCell.Tab.0.bottom" timestamp="1583374226821">
+    <state width="1898" height="277" key="GridCell.Tab.0.bottom" timestamp="1583400798834">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1898" height="277" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583374226821" />
-    <state width="1898" height="277" key="GridCell.Tab.0.center" timestamp="1583374226821">
+    <state width="1898" height="277" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583400798834" />
+    <state width="1898" height="277" key="GridCell.Tab.0.center" timestamp="1583400798834">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1898" height="277" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583374226821" />
-    <state width="1898" height="277" key="GridCell.Tab.0.left" timestamp="1583374226821">
+    <state width="1898" height="277" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583400798834" />
+    <state width="1898" height="277" key="GridCell.Tab.0.left" timestamp="1583400798834">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1898" height="277" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583374226821" />
-    <state width="1898" height="277" key="GridCell.Tab.0.right" timestamp="1583374226821">
+    <state width="1898" height="277" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583400798834" />
+    <state width="1898" height="277" key="GridCell.Tab.0.right" timestamp="1583400798834">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1898" height="277" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583374226821" />
+    <state width="1898" height="277" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583400798834" />
     <state x="461" y="151" key="SettingsEditor" timestamp="1583302708387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="151" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1583302708387" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1583313936350">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1583400282657">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1583313936350" />
-    <state x="647" y="310" key="git4idea.merge.GitPullDialog" timestamp="1583400172416">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1583400282657" />
+    <state x="647" y="310" key="git4idea.merge.GitPullDialog" timestamp="1583742978126">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="647" y="310" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1583400172416" />
+    <state x="647" y="310" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1583742978126" />
     <state x="616" y="235" key="run.anything.popup" timestamp="1583375545476">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
